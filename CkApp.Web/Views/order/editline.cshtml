@@ -1,0 +1,239 @@
+﻿@model CkApp.Web.Models.Ordering.MOrder
+
+<div class="pageheader">
+    <h2><i class="fa fa-pencil"></i> @ViewBag.ModuleTitle <span>@ViewBag.HeadTitle</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">Buradasınız:</span>
+        <ol class="breadcrumb">
+            <li><a href="/">Anasayfa</a></li>
+            <li class="active">@ViewBag.ModuleTitle</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="contentpanel">
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="/order/details/@Model.Order.OrderId" class="btn btn-default">Siparişe dön</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <form action="/order/publish/@Model.Order.OrderId" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="OrderId" value="@Model.Order.OrderId" />
+                @foreach (var item in Model.Companies)
+                {
+                    <input type="hidden" name="CompanyId" value="@item.CompanyId" />
+                }
+                <input type="hidden" name="PersonId" value="@Model.AuthorizedPerson.PersonId" />
+                <input type="hidden" name="OrderStateId" value="1" />
+                <div class="panel panel-default">
+                    <div class="panel-title">
+                        <h4 class="panel-heading">
+                            Sipariş detayları
+                            <input type="submit" name="btnCreateOrderDetail" value="Siparişi Gönder" class="btn btn-primary pull-right" />
+                        </h4>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td>Adres</td>
+                                    <td>
+                                        <select name="CountryId" class="form-control">
+                                            @foreach (var item in Model.Country.Countries)
+                                            {
+                                                <option value="@item.CountryId">@item.Title</option>
+                                            }
+                                        </select>
+                                        <select name="CityId" class="form-control">
+                                            @foreach (var item in Model.Country.Cities)
+                                            {
+                                                <option value="@item.CityId">@item.Title</option>
+                                            }
+                                        </select>
+                                        <select name="DistrictId" class="form-control">
+                                            @foreach (var item in Model.Country.Districts)
+                                            {
+                                                
+                                                <option value="@item.DistrictId">@item.Title</option>
+                                            }
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Adres</td>
+                                    <td><input type="text" name="Address" class="form-control" value="@Model.OrderDetail.Address" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Adet</td>
+                                    <td>
+                                        <input type="text" name="Quantity" class="form-control" value="@Model.OrderDetail.Quantity" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Model Dış / İç</td>
+                                    <td>
+                                        <input type="text" name="ModelDis" class="form-control" placeholder="Dış" value="@Model.OrderDetail.ModelDis" />
+                                        <input type="text" name="ModelIc" class="form-control" placeholder="Ic" value="@Model.OrderDetail.ModelIc" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Kasa Rengi Dış / İç</td>
+                                    <td>
+                                        <input type="text" name="KasaRengiDis" class="form-control" value="@Model.OrderDetail.KasaRengiDis" />
+                                        <input type="text" name="KasaRengiIc" class="form-control" value="@Model.OrderDetail.KasaRengiIc" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Kaplama Dış / İç</td>
+                                    <td>
+                                        <input type="text" name="KaplamaDis" placeholder="Dış" class="form-control" value="@Model.OrderDetail.KaplamaDis" />
+                                        <input type="text" name="KaplamaIc" placeholder="İç" class="form-control" value="@Model.OrderDetail.KaplamaIc" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Kapı Yönü</td>
+                                    <td>
+                                        <input type="text" name="KapiYonu" class="form-control" value="@Model.OrderDetail.KapiYonu" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Duvar Kalınlığı
+                                    </td>
+                                    <td>
+                                        <input type="text" name="DuvarKalinligi" class="form-control" value="@Model.OrderDetail.DuvarKalinligi" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Kasa Eni
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KasaEni" class="form-control" value="@Model.OrderDetail.KasaEni" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Kasa Boyu (Kapı dıştan bakılınca)
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KDKasaBoyu" class="form-control" value="@Model.OrderDetail.KDKasaBoyu" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Pervaz Sağ Tarafı (Kapı dıştan bakılınca)
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KDPervazSag" class="form-control" value="@Model.OrderDetail.KDPervazSag" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Pervaz Sol Tarafı (Kapı dıştan bakılınca)
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KDPervazSol" class="form-control" value="@Model.OrderDetail.KDPervazSol" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Pervaz Üst Tarafı (Kapı dıştan bakılınca)
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KDPervazUst" class="form-control" value="@Model.OrderDetail.KDPervazUst" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Kasa Boyu (Kapı içten bakılınca)
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KIKasaBoyu" class="form-control" value="@Model.OrderDetail.KIKasaBoyu" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Pervaz Sağ Tarafı (Kapı içten bakılınca)
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KIPervazSag" class="form-control" value="@Model.OrderDetail.KIPervazSag" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Pervaz Sol Tarafı (Kapı içten bakılınca)
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KIPervazSol" class="form-control" value="@Model.OrderDetail.KIPervazSol" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Pervaz Üst Tarafı (Kapı içten bakılınca)
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KIPervazUst" class="form-control" value="@Model.OrderDetail.KIPervazUst" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Kapı Markası
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KapiMarkasi" class="form-control" value="@Model.OrderDetail.KapiMarkasi" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Kanat Türü
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KanatTuru" class="form-control" value="@Model.OrderDetail.KanatTuru" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Kasa Türü
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KasaTuru" class="form-control" value="@Model.OrderDetail.KasaTuru" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Kilit Durumu
+                                    </td>
+                                    <td>
+                                        <input type="text" name="KiliDurumu" class="form-control" value="@Model.OrderDetail.KiliDurumu" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Özel Notlar
+                                    </td>
+                                    <td>
+                                        <textarea name="Description" id="Description" class="form-control">@Model.OrderDetail.Description</textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

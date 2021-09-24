@@ -1,0 +1,27 @@
+﻿<div class="logopanel">
+    <h1><span>[</span> bracket <span>]</span></h1>
+</div>
+
+<div class="leftpanelinner">
+
+    <div class="visible-xs hidden-sm hidden-md hidden-lg">
+        <div class="media userlogged">
+            <img alt="" src="/assets/images/photos/loggeduser.png" class="media-object">
+            <div class="media-body">
+                <h4>@ViewBag.PersonFullname</h4>
+                <span>@ViewBag.CompanyTitle</span>
+            </div>
+        </div>
+
+        <h5 class="sidebartitle actitle">Hesabım</h5>
+        <ul class="nav nav-pills nav-stacked nav-bracket mb30">
+            <li><a href="/people/me"><i class="fa fa-user"></i> <span>Profilim</span></a></li>
+            <li><a href="/people/logoff"><i class="fa fa-sign-out"></i> <span>Güvenli Çıkış</span></a></li>
+        </ul>
+    </div>
+
+    <h5 class="sidebartitle">Menü</h5>
+    <ul class="nav nav-pills nav-stacked nav-bracket">
+        @Html.Raw(ViewBag.Navigation)
+    </ul>
+</div>

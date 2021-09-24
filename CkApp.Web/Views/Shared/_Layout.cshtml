@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="@ViewBag.Charset">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="@ViewBag.Keyword">
+    <meta name="description" content="@ViewBag.Description">
+    <meta name="author" content="C#ylaklar">
+    <title>@ViewBag.HeadTitle | @ViewBag.ModuleTitle</title>
+    @Html.Raw(ViewBag.Css)
+</head>
+<body>
+
+    <div id="preloader">
+        <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+    </div>
+    <section>
+
+        <div class="leftpanel">
+            @Html.Partial("_PartNavigation")
+        </div>
+
+        <div class="mainpanel">
+
+            <div class="headerbar">
+
+                @Html.Partial("_PartHeader")
+
+            </div>
+
+            @RenderBody()
+
+        </div>
+
+    </section>
+    @Html.Raw(ViewBag.Js)
+</body>
+</html>

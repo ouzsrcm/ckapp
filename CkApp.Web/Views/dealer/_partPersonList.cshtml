@@ -1,0 +1,33 @@
+﻿@model CkApp.Web.Models.PeopleManagement.MPeopleList
+
+<div class="table-responsive">
+    <table class="table" id="table1">
+        <thead>
+            <tr>
+                <th>Personel No</th>
+                <th>Adı, Soyadı</th>
+                <th>Email</th>
+                <th>Gsm</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.People)
+            {
+                <tr>
+                    <td>@item.PersonId</td>
+                    <td>@item.Firstname @item.Lastname</td>
+                    <td>@item.Email</td>
+                    <td>@item.Gsm</td>
+                    <td>
+                        <a href="/people/profile/@item.PersonId" class="btn btn-info">
+                            Detaylar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="clearfix"></div>

@@ -1,0 +1,36 @@
+﻿@model Library.Person
+
+@Html.AntiForgeryToken()
+<input type="hidden" name="AppId" value="@Model.AppId" />
+<input type="hidden" name="CompanyId" value="@Model.CompanyId" />
+<input type="hidden" name="IsDeleted" value="0" />
+<div class="form-group">
+    <label class="col-sm-4 control-label">Adı:</label>
+    <div class="col-sm-8">
+        @Model.Firstname
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-4 control-label">Soyadı:</label>
+    <div class="col-sm-8">
+        @Model.Lastname
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-4 control-label">Eposta Adresi:</label>
+    <div class="col-sm-8">
+        @Model.Email
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-4 control-label">Cep Telefonu:</label>
+    <div class="col-sm-8">
+        @Model.Gsm
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-4 control-label">Adres:</label>
+    <div class="col-sm-8">
+        @Model.Address
+    </div>
+</div>

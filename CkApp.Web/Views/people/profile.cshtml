@@ -1,0 +1,81 @@
+﻿@model CkApp.Web.Models.PeopleManagement.MPeople
+
+<div class="pageheader">
+    <h2><i class="fa fa-table"></i> @ViewBag.ModuleTitle <span>@ViewBag.HeadTitle</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">Buradasınız:</span>
+        <ol class="breadcrumb">
+            <li><a href="/">Anasayfa</a></li>
+            <li class="active">@ViewBag.ModuleTitle</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+
+    <div class="row">
+        <div class="col-sm-3">
+            <img src="@Model.Person.Image" class="thumbnail img-responsive" alt="@Model.Person.Firstname @Model.Person.Lastname" />
+
+            <div class="mb30"></div>
+
+            <h5 class="subtitle">Firma Bilgileri</h5>
+            <p class="mb30">
+                Firma Adı: 
+                <a href="/company/details/@Model.Person.CompanyId">
+                    @Model.Person.Company.Title
+                </a>
+                <br />
+                Firma Türü: @Model.Person.Company.CompanyType.Title
+            </p>
+
+            <h5 class="subtitle">Adres Bilgileri</h5>
+            <address>
+                @Model.Person.Address
+            </address>
+
+        </div>
+        <div class="col-sm-9">
+
+            <div class="profile-header">
+                <h2 class="profile-name">@Model.Person.Firstname @Model.Person.Lastname</h2>
+                <div class="profile-location"><i class="fa fa-map-marker"></i> @Model.Person.Company.Title, 
+                    @if (((bool)Model.Person.IsAuthorized) == true)
+                    {
+                        <text><strong> Firma Yetkilisi</strong></text>
+                    }
+                </div>
+                <div class="profile-position"><i class="fa fa-briefcase"></i> <a href="mailto:@Model.Person.Email">@Model.Person.Email</a>, <a href="phone:@Model.Person.Gsm">@Model.Person.Gsm</a></div>
+
+                <div class="mb20"></div>
+
+                <a class="btn btn-white" href="/message/send/@Model.Person.PersonId"><i class="fa fa-envelope-o"></i> Mesaj Gönder</a>
+            </div>
+
+            <ul class="nav nav-tabs nav-justified nav-profile">
+                <li class="active"><a href="#info" data-toggle="tab"><strong>Profil Bilgileri</strong></a></li>
+                <li><a href="#orders" data-toggle="tab"><strong>Siparişler</strong></a></li>
+                <li><a href="#roles" data-toggle="tab"><strong>Rol Yönetimi</strong></a></li>
+                <li><a href="#credentials" data-toggle="tab"><strong>Giriş Bilgileri</strong></a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="info">
+                    @Html.Partial("_partPersoninfo", Model.Person)
+                </div>
+                <div class="tab-pane" id="orders">
+                    @Html.Partial("_partOrder", Model.Orders)
+                </div>
+                <div class="tab-pane" id="roles">
+                    @Html.Partial("_partRoles", Model.PeopleRole)
+                </div>
+                <div class="tab-pane" id="credentials">
+                    @Html.Partial("_partCredential", Model.Credential)
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

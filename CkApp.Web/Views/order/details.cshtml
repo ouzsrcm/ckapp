@@ -1,0 +1,280 @@
+﻿@model CkApp.Web.Models.Ordering.MOrder
+@{
+    ViewBag.Title = "details";
+}
+
+<div class="pageheader">
+    <h2><i class="fa fa-pencil"></i> @ViewBag.ModuleTitle <span>@ViewBag.HeadTitle</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">Buradasınız:</span>
+        <ol class="breadcrumb">
+            <li><a href="/">Anasayfa</a></li>
+            <li class="active">@ViewBag.ModuleTitle</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-btns">
+                        <a href="#" class="minimize">−</a>
+                    </div>
+                    <h4 class="panel-title"> <span title="Sipariş numarası">#@Model.Order.OrderId</span> - @Model.Order.Company.Title</h4>
+                    <p>
+                        Sipariş veren firma bilgileri
+                    </p>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Şirket:</label>
+                        <div class="col-sm-8">
+                            @Model.Order.Company.Title
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Yetkili:</label>
+                        <div class="col-sm-8">
+                            @Model.Order.Person.Firstname @Model.Order.Person.Lastname
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Sipariş Durumu:</label>
+                        <div class="col-sm-8">
+                            @Model.Order.OrderState.Title
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Oluşturulma Tarihi:</label>
+                        <div class="col-sm-8">
+                            @((Model.Order.CreationDate != null) ? ((DateTime)Model.Order.CreationDate).ToString("dd.MM.yyyy HH:mm") : "")
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Özel Notlar:</label>
+                        <div class="col-sm-8">
+                            @Model.Order.Description
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="panel-group panel-group-dark" id="accordion2">
+                @foreach (var item in Model.Order.OrderDetails)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion2" href="#@item.OrderDetailId" class="collapsed">
+                                    #@item.OrderDetailId | Durumu : @item.OrderState.Title
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="@item.OrderDetailId" class="panel-collapse collapse" style="height: 0px;">
+                            <div class="panel-body">
+                                <a href="/order/editline/@item.OrderDetailId" class="btn btn-default pull-right">Düzenle</a>
+                                <div class="clearfix"></div>
+                                <div class="panel panel-default">
+                                    <div class="panel-title">
+                                        Sipariş verilen firma bilgileri
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Şirket:</label>
+                                            <div class="col-sm-8">
+                                                @item.Company.Title
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Yetkili:</label>
+                                            <div class="col-sm-8">
+                                                @item.Person.Firstname @item.Person.Lastname
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Sipariş Durumu:</label>
+                                            <div class="col-sm-8">
+                                                @item.OrderState.Title
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Oluşturulma Tarihi:</label>
+                                            <div class="col-sm-8">
+                                                @((item.CreationDate != null) ? ((DateTime)item.CreationDate).ToString("dd.MM.yyyy HH:mm") : "")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>Adres</td>
+                                            <td>
+                                                @item.District.City.Country.Title / @item.District.City.Title / @item.District.Title
+                                                <br />
+                                                @item.Address
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Adet</td>
+                                            <td>@item.Quantity</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Model Dış / İç</td>
+                                            <td>
+                                                @item.ModelDis / @item.ModelIc
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kasa Rengi Dış / İç</td>
+                                            <td>
+                                                @item.KasaRengiDis / @item.KasaRengiIc
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kaplama Dış / İç</td>
+                                            <td>
+                                                @item.KaplamaDis / @item.KaplamaIc
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kapı Yönü</td>
+                                            <td>
+                                                @item.KapiYonu
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Duvar Kalınlığı
+                                            </td>
+                                            <td>
+                                                @item.DuvarKalinligi
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Kasa Eni
+                                            </td>
+                                            <td>
+                                                @item.KasaEni
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Kasa Boyu (Kapı dıştan bakılınca)
+                                            </td>
+                                            <td>
+                                                @item.KDKasaBoyu
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Pervaz Sağ Tarafı (Kapı dıştan bakılınca)
+                                            </td>
+                                            <td>
+                                                @item.KDPervazSag
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Pervaz Sol Tarafı (Kapı dıştan bakılınca)
+                                            </td>
+                                            <td>
+                                                @item.KDPervazSol
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Pervaz Üst Tarafı (Kapı dıştan bakılınca)
+                                            </td>
+                                            <td>
+                                                @item.KDPervazUst
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Kasa Boyu (Kapı içten bakılınca)
+                                            </td>
+                                            <td>
+                                                @item.KIKasaBoyu
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Pervaz Sağ Tarafı (Kapı içten bakılınca)
+                                            </td>
+                                            <td>
+                                                @item.KIPervazSag
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Pervaz Sol Tarafı (Kapı içten bakılınca)
+                                            </td>
+                                            <td>
+                                                @item.KIPervazSol
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Pervaz Üst Tarafı (Kapı içten bakılınca)
+                                            </td>
+                                            <td>
+                                                @item.KIPervazUst
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Kapı Markası
+                                            </td>
+                                            <td>
+                                                @item.KapiMarkasi
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Kanat Türü
+                                            </td>
+                                            <td>
+                                                @item.KanatTuru
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Kasa Türü
+                                            </td>
+                                            <td>
+                                                @item.KasaTuru
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Kilit Durumu
+                                            </td>
+                                            <td>
+                                                @item.KiliDurumu
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Özel Notlar
+                                            </td>
+                                            <td>
+                                                @item.Description
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

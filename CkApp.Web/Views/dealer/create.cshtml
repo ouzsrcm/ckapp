@@ -1,0 +1,77 @@
+﻿@model CkApp.Web.Models.CompanyManagement.MCompany
+
+<div class="pageheader">
+    <h2><i class="fa fa-table"></i> @ViewBag.ModuleTitle <span>@ViewBag.HeadTitle</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">Buradasınız:</span>
+        <ol class="breadcrumb">
+            <li><a href="/">Anasayfa</a></li>
+            <li class="active">@ViewBag.ModuleTitle</li>
+        </ol>
+    </div>
+</div>
+<div class="contentpanel">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Üretici Firma</h4>
+                </div>
+                <div class="panel-body">
+                    @if (Model.ParentCompany != null)
+                    {
+                        <div class="form-group">
+                            <label class="col-sm-4">Firma Adı:</label>
+                            <div class="col-sm-8">
+                                <a href="/company/details/@Model.ParentCompany.CompanyId">
+                                    @Model.ParentCompany.Title
+                                </a>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label class="col-sm-4">Firma Türü:</label>
+                                <div class="col-sm-8">
+                                    @Model.ParentCompany.CompanyType.Title
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4">Eposta, Telefon</label>
+                                <div class="col-sm-8">
+                                    @Model.ParentCompany.Email, @Model.ParentCompany.Gsm
+                                </div>
+                            </div>
+                    }
+
+                    @if (Model.PersonParentCompany != null)
+                    {
+                        <h4>Firma Yetkilisi</h4>
+                            <div class="form-group">
+                                <label class="col-sm-4">Adı, Soyadı:</label>
+                                <div class="col-sm-8">
+                                    <a href="/people/profile/@Model.PersonParentCompany.PersonId">
+                                        @Model.PersonParentCompany.Firstname @Model.PersonParentCompany.Lastname
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4">Eposta, Telefon:</label>
+                                <div class="col-sm-8">
+                                    @Model.PersonParentCompany.Email, @Model.PersonParentCompany.Gsm
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#info" data-toggle="tab"><strong>Bayi Bilgileri</strong></a></li>
+            </ul>
+            <div class="tab-content mb30">
+                <div class="tab-pane active" id="info">
+                    @Html.Partial("_partDealerInfo", Model.Company)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

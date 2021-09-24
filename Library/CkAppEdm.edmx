@@ -1,0 +1,2126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="App">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Url" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsAuthenticationRequired" Type="bit" />
+          <Property Name="AuthenticateUrl" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="ParentCompanyId" Type="int" />
+          <Property Name="CompanyTypeId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Email" Type="nvarchar" MaxLength="300" />
+          <Property Name="Gsm" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" />
+          <Property Name="TaxInformation" Type="nvarchar" MaxLength="300" />
+          <Property Name="TaxNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="CompanyOrder">
+          <Key>
+            <PropertyRef Name="CompanyOrderId" />
+          </Key>
+          <Property Name="CompanyOrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="CreationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CompanyType">
+          <Key>
+            <PropertyRef Name="CompanyTypeId" />
+          </Key>
+          <Property Name="CompanyTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Conversation">
+          <Key>
+            <PropertyRef Name="ConversationId" />
+          </Key>
+          <Property Name="ConversationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="CreationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ConversationMessage">
+          <Key>
+            <PropertyRef Name="ConversationMessageId" />
+          </Key>
+          <Property Name="ConversationMessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConversationId" Type="int" />
+          <Property Name="FromPersonId" Type="int" />
+          <Property Name="ToPersonId" Type="int" />
+          <Property Name="Message" Type="text" />
+          <Property Name="Image" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="IsRead" Type="bit" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="MenuItemId" />
+          </Key>
+          <Property Name="MenuItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuId" Type="int" />
+          <Property Name="ParentMenuItemId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="150" />
+          <Property Name="Sorting" Type="int" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="ModuleMethod">
+          <Key>
+            <PropertyRef Name="ModuleMethodId" />
+          </Key>
+          <Property Name="ModuleMethodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+          <Property Name="Name" Type="nvarchar" MaxLength="300" />
+          <Property Name="Url" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="ModuleMethodHeader">
+          <Key>
+            <PropertyRef Name="ModuleMethodHeaderId" />
+          </Key>
+          <Property Name="ModuleMethodHeaderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleMethodId" Type="int" />
+          <Property Name="Js" Type="text" />
+          <Property Name="Css" Type="text" />
+          <Property Name="IsAuthenticationRequired" Type="bit" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Keyword" Type="text" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Charset" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="OrderStateId" Type="int" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="Description" Type="text" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailId" />
+          </Key>
+          <Property Name="OrderDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="DistrictId" Type="int" />
+          <Property Name="OrderStateId" Type="int" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ModelDis" Type="nvarchar" MaxLength="300" />
+          <Property Name="ModelIc" Type="nvarchar" MaxLength="300" />
+          <Property Name="KasaRengiDis" Type="nvarchar" MaxLength="300" />
+          <Property Name="KasaRengiIc" Type="nvarchar" MaxLength="300" />
+          <Property Name="KaplamaDis" Type="nvarchar" MaxLength="300" />
+          <Property Name="KaplamaIc" Type="nvarchar" MaxLength="300" />
+          <Property Name="KapiYonu" Type="nvarchar" MaxLength="100" />
+          <Property Name="DuvarKalinligi" Type="nvarchar" MaxLength="100" />
+          <Property Name="KasaEni" Type="nvarchar" MaxLength="100" />
+          <Property Name="KDKasaBoyu" Type="nvarchar" MaxLength="100" />
+          <Property Name="KDPervazSag" Type="nvarchar" MaxLength="100" />
+          <Property Name="KDPervazSol" Type="nvarchar" MaxLength="100" />
+          <Property Name="KDPervazUst" Type="nvarchar" MaxLength="100" />
+          <Property Name="KIKasaBoyu" Type="nvarchar" MaxLength="100" />
+          <Property Name="KIPervazSag" Type="nvarchar" MaxLength="100" />
+          <Property Name="KIPervazSol" Type="nvarchar" MaxLength="100" />
+          <Property Name="KIPervazUst" Type="nvarchar" MaxLength="100" />
+          <Property Name="KapiMarkasi" Type="nvarchar" MaxLength="100" />
+          <Property Name="KanatTuru" Type="nvarchar" MaxLength="100" />
+          <Property Name="KasaTuru" Type="nvarchar" MaxLength="100" />
+          <Property Name="KiliDurumu" Type="nvarchar" MaxLength="100" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Description" Type="text" />
+        </EntityType>
+        <EntityType Name="OrderState">
+          <Key>
+            <PropertyRef Name="OrderStateId" />
+          </Key>
+          <Property Name="OrderStateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="100" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Gsm" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Image" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="CreatedPersonId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="IsAuthorized" Type="bit" />
+        </EntityType>
+        <EntityType Name="PersonCredential">
+          <Key>
+            <PropertyRef Name="PersonCredentialId" />
+          </Key>
+          <Property Name="PersonCredentialId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreationDate" Type="datetime" />
+          <Property Name="CreatedPersonId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="RoleMenu">
+          <Key>
+            <PropertyRef Name="RoleMenuId" />
+          </Key>
+          <Property Name="RoleMenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="MenuId" Type="int" />
+        </EntityType>
+        <EntityType Name="RoleModule">
+          <Key>
+            <PropertyRef Name="RoleModuleId" />
+          </Key>
+          <Property Name="RoleModuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="ModuleId" Type="int" />
+          <Property Name="PersonId" Type="int" />
+        </EntityType>
+        <EntityType Name="RoleModuleMethod">
+          <Key>
+            <PropertyRef Name="RoleModuleMethodId" />
+          </Key>
+          <Property Name="RoleModuleMethodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="ModuleMethodId" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_City_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_App">
+          <End Role="App" Type="Self.App" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_CompanyType">
+          <End Role="CompanyType" Type="Self.CompanyType" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyType">
+              <PropertyRef Name="CompanyTypeId" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CompanyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyOrder_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="CompanyOrder" Type="Self.CompanyOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompanyOrder">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyOrder_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="CompanyOrder" Type="Self.CompanyOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="CompanyOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_App">
+          <End Role="App" Type="Self.App" Multiplicity="0..1" />
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConversationMessage_Conversation">
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="0..1" />
+          <End Role="ConversationMessage" Type="Self.ConversationMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversation">
+              <PropertyRef Name="ConversationId" />
+            </Principal>
+            <Dependent Role="ConversationMessage">
+              <PropertyRef Name="ConversationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_District_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="District" Type="Self.District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_App">
+          <End Role="App" Type="Self.App" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItem_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Module_App">
+          <End Role="App" Type="Self.App" Multiplicity="0..1" />
+          <End Role="Module" Type="Self.Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleMethod_Module">
+          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
+          <End Role="ModuleMethod" Type="Self.ModuleMethod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="ModuleMethod">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleMethodHeader_ModuleMethod">
+          <End Role="ModuleMethod" Type="Self.ModuleMethod" Multiplicity="0..1" />
+          <End Role="ModuleMethodHeader" Type="Self.ModuleMethodHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleMethod">
+              <PropertyRef Name="ModuleMethodId" />
+            </Principal>
+            <Dependent Role="ModuleMethodHeader">
+              <PropertyRef Name="ModuleMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_App">
+          <End Role="App" Type="Self.App" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderState">
+          <End Role="OrderState" Type="Self.OrderState" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderState">
+              <PropertyRef Name="OrderStateId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_District">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_OrderState">
+          <End Role="OrderState" Type="Self.OrderState" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderState">
+              <PropertyRef Name="OrderStateId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_App">
+          <End Role="App" Type="Self.App" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="Person" Type="Self.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonCredential_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="PersonCredential" Type="Self.PersonCredential" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="PersonCredential">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_App">
+          <End Role="App" Type="Self.App" Multiplicity="0..1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="RoleMenu" Type="Self.RoleMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="RoleMenu">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenu_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="RoleMenu" Type="Self.RoleMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RoleMenu">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModule_Module">
+          <End Role="Module" Type="Self.Module" Multiplicity="0..1" />
+          <End Role="RoleModule" Type="Self.RoleModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="RoleModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModule_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="RoleModule" Type="Self.RoleModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="RoleModule">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModule_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="RoleModule" Type="Self.RoleModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RoleModule">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModuleMethod_ModuleMethod">
+          <End Role="ModuleMethod" Type="Self.ModuleMethod" Multiplicity="0..1" />
+          <End Role="RoleModuleMethod" Type="Self.RoleModuleMethod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleMethod">
+              <PropertyRef Name="ModuleMethodId" />
+            </Principal>
+            <Dependent Role="RoleModuleMethod">
+              <PropertyRef Name="ModuleMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModuleMethod_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="RoleModuleMethod" Type="Self.RoleModuleMethod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="RoleModuleMethod">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModuleMethod_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="RoleModuleMethod" Type="Self.RoleModuleMethod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RoleModuleMethod">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AppModelStoreContainer">
+          <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyOrder" EntityType="Self.CompanyOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyType" EntityType="Self.CompanyType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConversationMessage" EntityType="Self.ConversationMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuItem" EntityType="Self.MenuItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Module" EntityType="Self.Module" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleMethod" EntityType="Self.ModuleMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleMethodHeader" EntityType="Self.ModuleMethodHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderState" EntityType="Self.OrderState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonCredential" EntityType="Self.PersonCredential" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleMenu" EntityType="Self.RoleMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleModule" EntityType="Self.RoleModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleModuleMethod" EntityType="Self.RoleModuleMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_App" Association="Self.FK_Company_App">
+            <End Role="App" EntitySet="App" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_CompanyType" Association="Self.FK_Company_CompanyType">
+            <End Role="CompanyType" EntitySet="CompanyType" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyOrder_Company" Association="Self.FK_CompanyOrder_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyOrder" EntitySet="CompanyOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyOrder_Order" Association="Self.FK_CompanyOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="CompanyOrder" EntitySet="CompanyOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_App" Association="Self.FK_Conversation_App">
+            <End Role="App" EntitySet="App" />
+            <End Role="Conversation" EntitySet="Conversation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_Company" Association="Self.FK_Conversation_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Conversation" EntitySet="Conversation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConversationMessage_Conversation" Association="Self.FK_ConversationMessage_Conversation">
+            <End Role="Conversation" EntitySet="Conversation" />
+            <End Role="ConversationMessage" EntitySet="ConversationMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_District_City" Association="Self.FK_District_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="District" EntitySet="District" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_App" Association="Self.FK_Menu_App">
+            <End Role="App" EntitySet="App" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItem_Menu" Association="Self.FK_MenuItem_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuItem" EntitySet="MenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Module_App" Association="Self.FK_Module_App">
+            <End Role="App" EntitySet="App" />
+            <End Role="Module" EntitySet="Module" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleMethod_Module" Association="Self.FK_ModuleMethod_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="ModuleMethod" EntitySet="ModuleMethod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleMethodHeader_ModuleMethod" Association="Self.FK_ModuleMethodHeader_ModuleMethod">
+            <End Role="ModuleMethod" EntitySet="ModuleMethod" />
+            <End Role="ModuleMethodHeader" EntitySet="ModuleMethodHeader" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_App" Association="Self.FK_Order_App">
+            <End Role="App" EntitySet="App" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Company" Association="Self.FK_Order_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderState" Association="Self.FK_Order_OrderState">
+            <End Role="OrderState" EntitySet="OrderState" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Person" Association="Self.FK_Order_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Company" Association="Self.FK_OrderDetail_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_District" Association="Self.FK_OrderDetail_District">
+            <End Role="District" EntitySet="District" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_OrderState" Association="Self.FK_OrderDetail_OrderState">
+            <End Role="OrderState" EntitySet="OrderState" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Person" Association="Self.FK_OrderDetail_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_App" Association="Self.FK_Person_App">
+            <End Role="App" EntitySet="App" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Company" Association="Self.FK_Person_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonCredential_Person" Association="Self.FK_PersonCredential_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="PersonCredential" EntitySet="PersonCredential" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_App" Association="Self.FK_Role_App">
+            <End Role="App" EntitySet="App" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenu_Menu" Association="Self.FK_RoleMenu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="RoleMenu" EntitySet="RoleMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenu_Role" Association="Self.FK_RoleMenu_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleMenu" EntitySet="RoleMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModule_Module" Association="Self.FK_RoleModule_Module">
+            <End Role="Module" EntitySet="Module" />
+            <End Role="RoleModule" EntitySet="RoleModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModule_Person" Association="Self.FK_RoleModule_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="RoleModule" EntitySet="RoleModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModule_Role" Association="Self.FK_RoleModule_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleModule" EntitySet="RoleModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModuleMethod_ModuleMethod" Association="Self.FK_RoleModuleMethod_ModuleMethod">
+            <End Role="ModuleMethod" EntitySet="ModuleMethod" />
+            <End Role="RoleModuleMethod" EntitySet="RoleModuleMethod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModuleMethod_Person" Association="Self.FK_RoleModuleMethod_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="RoleModuleMethod" EntitySet="RoleModuleMethod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModuleMethod_Role" Association="Self.FK_RoleModuleMethod_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="RoleModuleMethod" EntitySet="RoleModuleMethod" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Apps" EntityType="AppModel.App" />
+          <EntitySet Name="Cities" EntityType="AppModel.City" />
+          <EntitySet Name="Companies" EntityType="AppModel.Company" />
+          <EntitySet Name="CompanyOrders" EntityType="AppModel.CompanyOrder" />
+          <EntitySet Name="CompanyTypes" EntityType="AppModel.CompanyType" />
+          <EntitySet Name="Conversations" EntityType="AppModel.Conversation" />
+          <EntitySet Name="ConversationMessages" EntityType="AppModel.ConversationMessage" />
+          <EntitySet Name="Countries" EntityType="AppModel.Country" />
+          <EntitySet Name="Districts" EntityType="AppModel.District" />
+          <EntitySet Name="Menus" EntityType="AppModel.Menu" />
+          <EntitySet Name="MenuItems" EntityType="AppModel.MenuItem" />
+          <EntitySet Name="Modules" EntityType="AppModel.Module" />
+          <EntitySet Name="ModuleMethods" EntityType="AppModel.ModuleMethod" />
+          <EntitySet Name="ModuleMethodHeaders" EntityType="AppModel.ModuleMethodHeader" />
+          <EntitySet Name="Orders" EntityType="AppModel.Order" />
+          <EntitySet Name="OrderDetails" EntityType="AppModel.OrderDetail" />
+          <EntitySet Name="OrderStates" EntityType="AppModel.OrderState" />
+          <EntitySet Name="People" EntityType="AppModel.Person" />
+          <EntitySet Name="PersonCredentials" EntityType="AppModel.PersonCredential" />
+          <EntitySet Name="Roles" EntityType="AppModel.Role" />
+          <EntitySet Name="RoleMenus" EntityType="AppModel.RoleMenu" />
+          <EntitySet Name="RoleModules" EntityType="AppModel.RoleModule" />
+          <EntitySet Name="RoleModuleMethods" EntityType="AppModel.RoleModuleMethod" />
+          <EntitySet Name="sysdiagrams" EntityType="AppModel.sysdiagram" />
+          <AssociationSet Name="FK_Company_App" Association="AppModel.FK_Company_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_App" Association="AppModel.FK_Conversation_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="Conversation" EntitySet="Conversations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_App" Association="AppModel.FK_Menu_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="Menu" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Module_App" Association="AppModel.FK_Module_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="Module" EntitySet="Modules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_App" Association="AppModel.FK_Order_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_App" Association="AppModel.FK_Person_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Role_App" Association="AppModel.FK_Role_App">
+            <End Role="App" EntitySet="Apps" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_Country" Association="AppModel.FK_City_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_District_City" Association="AppModel.FK_District_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="District" EntitySet="Districts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_CompanyType" Association="AppModel.FK_Company_CompanyType">
+            <End Role="CompanyType" EntitySet="CompanyTypes" />
+            <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyOrder_Company" Association="AppModel.FK_CompanyOrder_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyOrder" EntitySet="CompanyOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_Company" Association="AppModel.FK_Conversation_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Conversation" EntitySet="Conversations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Company" Association="AppModel.FK_Order_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Company" Association="AppModel.FK_OrderDetail_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Company" Association="AppModel.FK_Person_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyOrder_Order" Association="AppModel.FK_CompanyOrder_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="CompanyOrder" EntitySet="CompanyOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConversationMessage_Conversation" Association="AppModel.FK_ConversationMessage_Conversation">
+            <End Role="Conversation" EntitySet="Conversations" />
+            <End Role="ConversationMessage" EntitySet="ConversationMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_District" Association="AppModel.FK_OrderDetail_District">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItem_Menu" Association="AppModel.FK_MenuItem_Menu">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenu_Menu" Association="AppModel.FK_RoleMenu_Menu">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="RoleMenu" EntitySet="RoleMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleMethod_Module" Association="AppModel.FK_ModuleMethod_Module">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="ModuleMethod" EntitySet="ModuleMethods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModule_Module" Association="AppModel.FK_RoleModule_Module">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="RoleModule" EntitySet="RoleModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleMethodHeader_ModuleMethod" Association="AppModel.FK_ModuleMethodHeader_ModuleMethod">
+            <End Role="ModuleMethod" EntitySet="ModuleMethods" />
+            <End Role="ModuleMethodHeader" EntitySet="ModuleMethodHeaders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModuleMethod_ModuleMethod" Association="AppModel.FK_RoleModuleMethod_ModuleMethod">
+            <End Role="ModuleMethod" EntitySet="ModuleMethods" />
+            <End Role="RoleModuleMethod" EntitySet="RoleModuleMethods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_OrderState" Association="AppModel.FK_Order_OrderState">
+            <End Role="OrderState" EntitySet="OrderStates" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Person" Association="AppModel.FK_Order_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="AppModel.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_OrderState" Association="AppModel.FK_OrderDetail_OrderState">
+            <End Role="OrderState" EntitySet="OrderStates" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Person" Association="AppModel.FK_OrderDetail_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonCredential_Person" Association="AppModel.FK_PersonCredential_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="PersonCredential" EntitySet="PersonCredentials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModule_Person" Association="AppModel.FK_RoleModule_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="RoleModule" EntitySet="RoleModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModuleMethod_Person" Association="AppModel.FK_RoleModuleMethod_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="RoleModuleMethod" EntitySet="RoleModuleMethods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleMenu_Role" Association="AppModel.FK_RoleMenu_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="RoleMenu" EntitySet="RoleMenus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModule_Role" Association="AppModel.FK_RoleModule_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="RoleModule" EntitySet="RoleModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleModuleMethod_Role" Association="AppModel.FK_RoleModuleMethod_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="RoleModuleMethod" EntitySet="RoleModuleMethods" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="App">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsAuthenticationRequired" Type="Boolean" />
+          <Property Name="AuthenticateUrl" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Companies" Relationship="AppModel.FK_Company_App" FromRole="App" ToRole="Company" />
+          <NavigationProperty Name="Conversations" Relationship="AppModel.FK_Conversation_App" FromRole="App" ToRole="Conversation" />
+          <NavigationProperty Name="Menus" Relationship="AppModel.FK_Menu_App" FromRole="App" ToRole="Menu" />
+          <NavigationProperty Name="Modules" Relationship="AppModel.FK_Module_App" FromRole="App" ToRole="Module" />
+          <NavigationProperty Name="Orders" Relationship="AppModel.FK_Order_App" FromRole="App" ToRole="Order" />
+          <NavigationProperty Name="People" Relationship="AppModel.FK_Person_App" FromRole="App" ToRole="Person" />
+          <NavigationProperty Name="Roles" Relationship="AppModel.FK_Role_App" FromRole="App" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Country" Relationship="AppModel.FK_City_Country" FromRole="City" ToRole="Country" />
+          <NavigationProperty Name="Districts" Relationship="AppModel.FK_District_City" FromRole="City" ToRole="District" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="ParentCompanyId" Type="Int32" />
+          <Property Name="CompanyTypeId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Gsm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="TaxInformation" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="TaxNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="App" Relationship="AppModel.FK_Company_App" FromRole="Company" ToRole="App" />
+          <NavigationProperty Name="CompanyType" Relationship="AppModel.FK_Company_CompanyType" FromRole="Company" ToRole="CompanyType" />
+          <NavigationProperty Name="CompanyOrders" Relationship="AppModel.FK_CompanyOrder_Company" FromRole="Company" ToRole="CompanyOrder" />
+          <NavigationProperty Name="Conversations" Relationship="AppModel.FK_Conversation_Company" FromRole="Company" ToRole="Conversation" />
+          <NavigationProperty Name="Orders" Relationship="AppModel.FK_Order_Company" FromRole="Company" ToRole="Order" />
+          <NavigationProperty Name="OrderDetails" Relationship="AppModel.FK_OrderDetail_Company" FromRole="Company" ToRole="OrderDetail" />
+          <NavigationProperty Name="People" Relationship="AppModel.FK_Person_Company" FromRole="Company" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="CompanyOrder">
+          <Key>
+            <PropertyRef Name="CompanyOrderId" />
+          </Key>
+          <Property Name="CompanyOrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Company" Relationship="AppModel.FK_CompanyOrder_Company" FromRole="CompanyOrder" ToRole="Company" />
+          <NavigationProperty Name="Order" Relationship="AppModel.FK_CompanyOrder_Order" FromRole="CompanyOrder" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="CompanyType">
+          <Key>
+            <PropertyRef Name="CompanyTypeId" />
+          </Key>
+          <Property Name="CompanyTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Companies" Relationship="AppModel.FK_Company_CompanyType" FromRole="CompanyType" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Conversation">
+          <Key>
+            <PropertyRef Name="ConversationId" />
+          </Key>
+          <Property Name="ConversationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="App" Relationship="AppModel.FK_Conversation_App" FromRole="Conversation" ToRole="App" />
+          <NavigationProperty Name="Company" Relationship="AppModel.FK_Conversation_Company" FromRole="Conversation" ToRole="Company" />
+          <NavigationProperty Name="ConversationMessages" Relationship="AppModel.FK_ConversationMessage_Conversation" FromRole="Conversation" ToRole="ConversationMessage" />
+        </EntityType>
+        <EntityType Name="ConversationMessage">
+          <Key>
+            <PropertyRef Name="ConversationMessageId" />
+          </Key>
+          <Property Name="ConversationMessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConversationId" Type="Int32" />
+          <Property Name="FromPersonId" Type="Int32" />
+          <Property Name="ToPersonId" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="IsRead" Type="Boolean" />
+          <NavigationProperty Name="Conversation" Relationship="AppModel.FK_ConversationMessage_Conversation" FromRole="ConversationMessage" ToRole="Conversation" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cities" Relationship="AppModel.FK_City_Country" FromRole="Country" ToRole="City" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="City" Relationship="AppModel.FK_District_City" FromRole="District" ToRole="City" />
+          <NavigationProperty Name="OrderDetails" Relationship="AppModel.FK_OrderDetail_District" FromRole="District" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="MenuId" />
+          </Key>
+          <Property Name="MenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="App" Relationship="AppModel.FK_Menu_App" FromRole="Menu" ToRole="App" />
+          <NavigationProperty Name="MenuItems" Relationship="AppModel.FK_MenuItem_Menu" FromRole="Menu" ToRole="MenuItem" />
+          <NavigationProperty Name="RoleMenus" Relationship="AppModel.FK_RoleMenu_Menu" FromRole="Menu" ToRole="RoleMenu" />
+        </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="MenuItemId" />
+          </Key>
+          <Property Name="MenuItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuId" Type="Int32" />
+          <Property Name="ParentMenuItemId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Sorting" Type="Int32" />
+          <NavigationProperty Name="Menu" Relationship="AppModel.FK_MenuItem_Menu" FromRole="MenuItem" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="ModuleId" />
+          </Key>
+          <Property Name="ModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="App" Relationship="AppModel.FK_Module_App" FromRole="Module" ToRole="App" />
+          <NavigationProperty Name="ModuleMethods" Relationship="AppModel.FK_ModuleMethod_Module" FromRole="Module" ToRole="ModuleMethod" />
+          <NavigationProperty Name="RoleModules" Relationship="AppModel.FK_RoleModule_Module" FromRole="Module" ToRole="RoleModule" />
+        </EntityType>
+        <EntityType Name="ModuleMethod">
+          <Key>
+            <PropertyRef Name="ModuleMethodId" />
+          </Key>
+          <Property Name="ModuleMethodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Module" Relationship="AppModel.FK_ModuleMethod_Module" FromRole="ModuleMethod" ToRole="Module" />
+          <NavigationProperty Name="ModuleMethodHeaders" Relationship="AppModel.FK_ModuleMethodHeader_ModuleMethod" FromRole="ModuleMethod" ToRole="ModuleMethodHeader" />
+          <NavigationProperty Name="RoleModuleMethods" Relationship="AppModel.FK_RoleModuleMethod_ModuleMethod" FromRole="ModuleMethod" ToRole="RoleModuleMethod" />
+        </EntityType>
+        <EntityType Name="ModuleMethodHeader">
+          <Key>
+            <PropertyRef Name="ModuleMethodHeaderId" />
+          </Key>
+          <Property Name="ModuleMethodHeaderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleMethodId" Type="Int32" />
+          <Property Name="Js" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Css" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsAuthenticationRequired" Type="Boolean" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Charset" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ModuleMethod" Relationship="AppModel.FK_ModuleMethodHeader_ModuleMethod" FromRole="ModuleMethodHeader" ToRole="ModuleMethod" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="OrderStateId" Type="Int32" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="App" Relationship="AppModel.FK_Order_App" FromRole="Order" ToRole="App" />
+          <NavigationProperty Name="Company" Relationship="AppModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
+          <NavigationProperty Name="CompanyOrders" Relationship="AppModel.FK_CompanyOrder_Order" FromRole="Order" ToRole="CompanyOrder" />
+          <NavigationProperty Name="OrderState" Relationship="AppModel.FK_Order_OrderState" FromRole="Order" ToRole="OrderState" />
+          <NavigationProperty Name="Person" Relationship="AppModel.FK_Order_Person" FromRole="Order" ToRole="Person" />
+          <NavigationProperty Name="OrderDetails" Relationship="AppModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailId" />
+          </Key>
+          <Property Name="OrderDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="DistrictId" Type="Int32" />
+          <Property Name="OrderStateId" Type="Int32" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ModelDis" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ModelIc" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="KasaRengiDis" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="KasaRengiIc" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="KaplamaDis" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="KaplamaIc" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="KapiYonu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DuvarKalinligi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KasaEni" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KDKasaBoyu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KDPervazSag" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KDPervazSol" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KDPervazUst" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KIKasaBoyu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KIPervazSag" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KIPervazSol" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KIPervazUst" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KapiMarkasi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KanatTuru" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KasaTuru" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KiliDurumu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Company" Relationship="AppModel.FK_OrderDetail_Company" FromRole="OrderDetail" ToRole="Company" />
+          <NavigationProperty Name="District" Relationship="AppModel.FK_OrderDetail_District" FromRole="OrderDetail" ToRole="District" />
+          <NavigationProperty Name="Order" Relationship="AppModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="OrderState" Relationship="AppModel.FK_OrderDetail_OrderState" FromRole="OrderDetail" ToRole="OrderState" />
+          <NavigationProperty Name="Person" Relationship="AppModel.FK_OrderDetail_Person" FromRole="OrderDetail" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="OrderState">
+          <Key>
+            <PropertyRef Name="OrderStateId" />
+          </Key>
+          <Property Name="OrderStateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="AppModel.FK_Order_OrderState" FromRole="OrderState" ToRole="Order" />
+          <NavigationProperty Name="OrderDetails" Relationship="AppModel.FK_OrderDetail_OrderState" FromRole="OrderState" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Gsm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedPersonId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="IsAuthorized" Type="Boolean" />
+          <NavigationProperty Name="App" Relationship="AppModel.FK_Person_App" FromRole="Person" ToRole="App" />
+          <NavigationProperty Name="Company" Relationship="AppModel.FK_Person_Company" FromRole="Person" ToRole="Company" />
+          <NavigationProperty Name="Orders" Relationship="AppModel.FK_Order_Person" FromRole="Person" ToRole="Order" />
+          <NavigationProperty Name="OrderDetails" Relationship="AppModel.FK_OrderDetail_Person" FromRole="Person" ToRole="OrderDetail" />
+          <NavigationProperty Name="PersonCredentials" Relationship="AppModel.FK_PersonCredential_Person" FromRole="Person" ToRole="PersonCredential" />
+          <NavigationProperty Name="RoleModules" Relationship="AppModel.FK_RoleModule_Person" FromRole="Person" ToRole="RoleModule" />
+          <NavigationProperty Name="RoleModuleMethods" Relationship="AppModel.FK_RoleModuleMethod_Person" FromRole="Person" ToRole="RoleModuleMethod" />
+        </EntityType>
+        <EntityType Name="PersonCredential">
+          <Key>
+            <PropertyRef Name="PersonCredentialId" />
+          </Key>
+          <Property Name="PersonCredentialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreationDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedPersonId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Person" Relationship="AppModel.FK_PersonCredential_Person" FromRole="PersonCredential" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="App" Relationship="AppModel.FK_Role_App" FromRole="Role" ToRole="App" />
+          <NavigationProperty Name="RoleMenus" Relationship="AppModel.FK_RoleMenu_Role" FromRole="Role" ToRole="RoleMenu" />
+          <NavigationProperty Name="RoleModules" Relationship="AppModel.FK_RoleModule_Role" FromRole="Role" ToRole="RoleModule" />
+          <NavigationProperty Name="RoleModuleMethods" Relationship="AppModel.FK_RoleModuleMethod_Role" FromRole="Role" ToRole="RoleModuleMethod" />
+        </EntityType>
+        <EntityType Name="RoleMenu">
+          <Key>
+            <PropertyRef Name="RoleMenuId" />
+          </Key>
+          <Property Name="RoleMenuId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="MenuId" Type="Int32" />
+          <NavigationProperty Name="Menu" Relationship="AppModel.FK_RoleMenu_Menu" FromRole="RoleMenu" ToRole="Menu" />
+          <NavigationProperty Name="Role" Relationship="AppModel.FK_RoleMenu_Role" FromRole="RoleMenu" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="RoleModule">
+          <Key>
+            <PropertyRef Name="RoleModuleId" />
+          </Key>
+          <Property Name="RoleModuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="ModuleId" Type="Int32" />
+          <Property Name="PersonId" Type="Int32" />
+          <NavigationProperty Name="Module" Relationship="AppModel.FK_RoleModule_Module" FromRole="RoleModule" ToRole="Module" />
+          <NavigationProperty Name="Person" Relationship="AppModel.FK_RoleModule_Person" FromRole="RoleModule" ToRole="Person" />
+          <NavigationProperty Name="Role" Relationship="AppModel.FK_RoleModule_Role" FromRole="RoleModule" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="RoleModuleMethod">
+          <Key>
+            <PropertyRef Name="RoleModuleMethodId" />
+          </Key>
+          <Property Name="RoleModuleMethodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="ModuleMethodId" Type="Int32" />
+          <NavigationProperty Name="ModuleMethod" Relationship="AppModel.FK_RoleModuleMethod_ModuleMethod" FromRole="RoleModuleMethod" ToRole="ModuleMethod" />
+          <NavigationProperty Name="Person" Relationship="AppModel.FK_RoleModuleMethod_Person" FromRole="RoleModuleMethod" ToRole="Person" />
+          <NavigationProperty Name="Role" Relationship="AppModel.FK_RoleModuleMethod_Role" FromRole="RoleModuleMethod" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Company_App">
+          <End Type="AppModel.App" Role="App" Multiplicity="0..1" />
+          <End Type="AppModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_App">
+          <End Type="AppModel.App" Role="App" Multiplicity="0..1" />
+          <End Type="AppModel.Conversation" Role="Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_App">
+          <End Type="AppModel.App" Role="App" Multiplicity="0..1" />
+          <End Type="AppModel.Menu" Role="Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Module_App">
+          <End Type="AppModel.App" Role="App" Multiplicity="0..1" />
+          <End Type="AppModel.Module" Role="Module" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Module">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_App">
+          <End Type="AppModel.App" Role="App" Multiplicity="0..1" />
+          <End Type="AppModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_App">
+          <End Type="AppModel.App" Role="App" Multiplicity="0..1" />
+          <End Type="AppModel.Person" Role="Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Role_App">
+          <End Type="AppModel.App" Role="App" Multiplicity="0..1" />
+          <End Type="AppModel.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="App">
+              <PropertyRef Name="AppId" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_Country">
+          <End Type="AppModel.Country" Role="Country" Multiplicity="0..1" />
+          <End Type="AppModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_District_City">
+          <End Type="AppModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="AppModel.District" Role="District" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="District">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_CompanyType">
+          <End Type="AppModel.CompanyType" Role="CompanyType" Multiplicity="0..1" />
+          <End Type="AppModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyType">
+              <PropertyRef Name="CompanyTypeId" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CompanyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyOrder_Company">
+          <End Type="AppModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="AppModel.CompanyOrder" Role="CompanyOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="CompanyOrder">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_Company">
+          <End Type="AppModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="AppModel.Conversation" Role="Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Company">
+          <End Type="AppModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="AppModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Company">
+          <End Type="AppModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="AppModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_Company">
+          <End Type="AppModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="AppModel.Person" Role="Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyOrder_Order">
+          <End Type="AppModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="AppModel.CompanyOrder" Role="CompanyOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="CompanyOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConversationMessage_Conversation">
+          <End Type="AppModel.Conversation" Role="Conversation" Multiplicity="0..1" />
+          <End Type="AppModel.ConversationMessage" Role="ConversationMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversation">
+              <PropertyRef Name="ConversationId" />
+            </Principal>
+            <Dependent Role="ConversationMessage">
+              <PropertyRef Name="ConversationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_District">
+          <End Type="AppModel.District" Role="District" Multiplicity="0..1" />
+          <End Type="AppModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="DistrictId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItem_Menu">
+          <End Type="AppModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="AppModel.MenuItem" Role="MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenu_Menu">
+          <End Type="AppModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="AppModel.RoleMenu" Role="RoleMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="MenuId" />
+            </Principal>
+            <Dependent Role="RoleMenu">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleMethod_Module">
+          <End Type="AppModel.Module" Role="Module" Multiplicity="0..1" />
+          <End Type="AppModel.ModuleMethod" Role="ModuleMethod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="ModuleMethod">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModule_Module">
+          <End Type="AppModel.Module" Role="Module" Multiplicity="0..1" />
+          <End Type="AppModel.RoleModule" Role="RoleModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="ModuleId" />
+            </Principal>
+            <Dependent Role="RoleModule">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleMethodHeader_ModuleMethod">
+          <End Type="AppModel.ModuleMethod" Role="ModuleMethod" Multiplicity="0..1" />
+          <End Type="AppModel.ModuleMethodHeader" Role="ModuleMethodHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleMethod">
+              <PropertyRef Name="ModuleMethodId" />
+            </Principal>
+            <Dependent Role="ModuleMethodHeader">
+              <PropertyRef Name="ModuleMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModuleMethod_ModuleMethod">
+          <End Type="AppModel.ModuleMethod" Role="ModuleMethod" Multiplicity="0..1" />
+          <End Type="AppModel.RoleModuleMethod" Role="RoleModuleMethod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleMethod">
+              <PropertyRef Name="ModuleMethodId" />
+            </Principal>
+            <Dependent Role="RoleModuleMethod">
+              <PropertyRef Name="ModuleMethodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_OrderState">
+          <End Type="AppModel.OrderState" Role="OrderState" Multiplicity="0..1" />
+          <End Type="AppModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderState">
+              <PropertyRef Name="OrderStateId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Person">
+          <End Type="AppModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="AppModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Order">
+          <End Type="AppModel.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="AppModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_OrderState">
+          <End Type="AppModel.OrderState" Role="OrderState" Multiplicity="0..1" />
+          <End Type="AppModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderState">
+              <PropertyRef Name="OrderStateId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Person">
+          <End Type="AppModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="AppModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonCredential_Person">
+          <End Type="AppModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="AppModel.PersonCredential" Role="PersonCredential" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="PersonCredential">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModule_Person">
+          <End Type="AppModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="AppModel.RoleModule" Role="RoleModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="RoleModule">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModuleMethod_Person">
+          <End Type="AppModel.Person" Role="Person" Multiplicity="0..1" />
+          <End Type="AppModel.RoleModuleMethod" Role="RoleModuleMethod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="RoleModuleMethod">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleMenu_Role">
+          <End Type="AppModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="AppModel.RoleMenu" Role="RoleMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RoleMenu">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModule_Role">
+          <End Type="AppModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="AppModel.RoleModule" Role="RoleModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RoleModule">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleModuleMethod_Role">
+          <End Type="AppModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="AppModel.RoleModuleMethod" Role="RoleModuleMethod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RoleModuleMethod">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AppModelStoreContainer" CdmEntityContainer="AppEntities">
+          <EntitySetMapping Name="Apps">
+            <EntityTypeMapping TypeName="AppModel.App">
+              <MappingFragment StoreEntitySet="App">
+                <ScalarProperty Name="AuthenticateUrl" ColumnName="AuthenticateUrl" />
+                <ScalarProperty Name="IsAuthenticationRequired" ColumnName="IsAuthenticationRequired" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="AppModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="AppModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="TaxNumber" ColumnName="TaxNumber" />
+                <ScalarProperty Name="TaxInformation" ColumnName="TaxInformation" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gsm" ColumnName="Gsm" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+                <ScalarProperty Name="ParentCompanyId" ColumnName="ParentCompanyId" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyOrders">
+            <EntityTypeMapping TypeName="AppModel.CompanyOrder">
+              <MappingFragment StoreEntitySet="CompanyOrder">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="CompanyOrderId" ColumnName="CompanyOrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyTypes">
+            <EntityTypeMapping TypeName="AppModel.CompanyType">
+              <MappingFragment StoreEntitySet="CompanyType">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conversations">
+            <EntityTypeMapping TypeName="AppModel.Conversation">
+              <MappingFragment StoreEntitySet="Conversation">
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConversationMessages">
+            <EntityTypeMapping TypeName="AppModel.ConversationMessage">
+              <MappingFragment StoreEntitySet="ConversationMessage">
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ToPersonId" ColumnName="ToPersonId" />
+                <ScalarProperty Name="FromPersonId" ColumnName="FromPersonId" />
+                <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+                <ScalarProperty Name="ConversationMessageId" ColumnName="ConversationMessageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="AppModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="AppModel.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="AppModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuItems">
+            <EntityTypeMapping TypeName="AppModel.MenuItem">
+              <MappingFragment StoreEntitySet="MenuItem">
+                <ScalarProperty Name="Sorting" ColumnName="Sorting" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ParentMenuItemId" ColumnName="ParentMenuItemId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="AppModel.Module">
+              <MappingFragment StoreEntitySet="Module">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleMethods">
+            <EntityTypeMapping TypeName="AppModel.ModuleMethod">
+              <MappingFragment StoreEntitySet="ModuleMethod">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="ModuleMethodId" ColumnName="ModuleMethodId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleMethodHeaders">
+            <EntityTypeMapping TypeName="AppModel.ModuleMethodHeader">
+              <MappingFragment StoreEntitySet="ModuleMethodHeader">
+                <ScalarProperty Name="Charset" ColumnName="Charset" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IsAuthenticationRequired" ColumnName="IsAuthenticationRequired" />
+                <ScalarProperty Name="Css" ColumnName="Css" />
+                <ScalarProperty Name="Js" ColumnName="Js" />
+                <ScalarProperty Name="ModuleMethodId" ColumnName="ModuleMethodId" />
+                <ScalarProperty Name="ModuleMethodHeaderId" ColumnName="ModuleMethodHeaderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="AppModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="OrderStateId" ColumnName="OrderStateId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="AppModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="KiliDurumu" ColumnName="KiliDurumu" />
+                <ScalarProperty Name="KasaTuru" ColumnName="KasaTuru" />
+                <ScalarProperty Name="KanatTuru" ColumnName="KanatTuru" />
+                <ScalarProperty Name="KapiMarkasi" ColumnName="KapiMarkasi" />
+                <ScalarProperty Name="KIPervazUst" ColumnName="KIPervazUst" />
+                <ScalarProperty Name="KIPervazSol" ColumnName="KIPervazSol" />
+                <ScalarProperty Name="KIPervazSag" ColumnName="KIPervazSag" />
+                <ScalarProperty Name="KIKasaBoyu" ColumnName="KIKasaBoyu" />
+                <ScalarProperty Name="KDPervazUst" ColumnName="KDPervazUst" />
+                <ScalarProperty Name="KDPervazSol" ColumnName="KDPervazSol" />
+                <ScalarProperty Name="KDPervazSag" ColumnName="KDPervazSag" />
+                <ScalarProperty Name="KDKasaBoyu" ColumnName="KDKasaBoyu" />
+                <ScalarProperty Name="KasaEni" ColumnName="KasaEni" />
+                <ScalarProperty Name="DuvarKalinligi" ColumnName="DuvarKalinligi" />
+                <ScalarProperty Name="KapiYonu" ColumnName="KapiYonu" />
+                <ScalarProperty Name="KaplamaIc" ColumnName="KaplamaIc" />
+                <ScalarProperty Name="KaplamaDis" ColumnName="KaplamaDis" />
+                <ScalarProperty Name="KasaRengiIc" ColumnName="KasaRengiIc" />
+                <ScalarProperty Name="KasaRengiDis" ColumnName="KasaRengiDis" />
+                <ScalarProperty Name="ModelIc" ColumnName="ModelIc" />
+                <ScalarProperty Name="ModelDis" ColumnName="ModelDis" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="OrderStateId" ColumnName="OrderStateId" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStates">
+            <EntityTypeMapping TypeName="AppModel.OrderState">
+              <MappingFragment StoreEntitySet="OrderState">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="OrderStateId" ColumnName="OrderStateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="AppModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="IsAuthorized" ColumnName="IsAuthorized" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedPersonId" ColumnName="CreatedPersonId" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gsm" ColumnName="Gsm" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonCredentials">
+            <EntityTypeMapping TypeName="AppModel.PersonCredential">
+              <MappingFragment StoreEntitySet="PersonCredential">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedPersonId" ColumnName="CreatedPersonId" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="PersonCredentialId" ColumnName="PersonCredentialId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="AppModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMenus">
+            <EntityTypeMapping TypeName="AppModel.RoleMenu">
+              <MappingFragment StoreEntitySet="RoleMenu">
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleMenuId" ColumnName="RoleMenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleModules">
+            <EntityTypeMapping TypeName="AppModel.RoleModule">
+              <MappingFragment StoreEntitySet="RoleModule">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleModuleId" ColumnName="RoleModuleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleModuleMethods">
+            <EntityTypeMapping TypeName="AppModel.RoleModuleMethod">
+              <MappingFragment StoreEntitySet="RoleModuleMethod">
+                <ScalarProperty Name="ModuleMethodId" ColumnName="ModuleMethodId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleModuleMethodId" ColumnName="RoleModuleMethodId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AppModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

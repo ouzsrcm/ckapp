@@ -1,0 +1,58 @@
+﻿@model CkApp.Web.Models.PeopleManagement.MPeopleList
+
+<div class="pageheader">
+    <h2><i class="fa fa-table"></i> @ViewBag.ModuleTitle <span>@ViewBag.HeadTitle</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">Buradasınız:</span>
+        <ol class="breadcrumb">
+            <li><a href="/">Anasayfa</a></li>
+            <li class="active">@ViewBag.ModuleTitle</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-btns">
+                <a href="#" class="minimize">&minus;</a>
+            </div>
+            <h3 class="panel-title">Filtreler</h3>
+            <p>...</p>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table" id="table1">
+                    <thead>
+                        <tr>
+                            <th>Personel No</th>
+                            <th>Adı, Soyadı</th>
+                            <th>Email</th>
+                            <th>Gsm</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.People)
+                        {
+                            <tr>
+                                <td>@item.PersonId</td>
+                                <td>@item.Firstname @item.Lastname</td>
+                                <td>@item.Email</td>
+                                <td>@item.Gsm</td>
+                                <td>
+                                    <a href="/people/profile/@item.PersonId" class="btn btn-info">
+                                        Detaylar
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>

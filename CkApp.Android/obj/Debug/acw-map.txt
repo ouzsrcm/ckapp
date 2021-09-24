@@ -1,0 +1,4 @@
+CkApp.Android.MainActivity, CkApp.Android;md56496023c391a047044ad79ca1dbf0287.MainActivity
+CkApp.Android.MainActivity, CkApp.Android, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null;md56496023c391a047044ad79ca1dbf0287.MainActivity
+CkApp.Android.MainActivity;md56496023c391a047044ad79ca1dbf0287.MainActivity
+ckapp.android.MainActivity;md56496023c391a047044ad79ca1dbf0287.MainActivity

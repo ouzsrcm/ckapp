@@ -1,0 +1,27 @@
+﻿@model CkApp.Web.Models.CompanyManagement.MAuthorizedPerson
+
+@if (Model != null)
+{
+    <form action="/dealer/changeperson" method="post">
+        <input type="hidden" name="CompanyId" value="@Model.AuthorizedPerson.CompanyId" />
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label class="col-sm-4">Yetkili Personel</label>
+            <div class="col-sm-4">
+                <select name="PersonId" class="form-control">
+                    @foreach (var item in Model.People)
+                {
+                        <option value="@item.PersonId"
+                                @if (Model.AuthorizedPerson.PersonId == item.PersonId) { <text> selected="selected" </text>    }>
+                            @item.Firstname @item.Lastname
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <input type="submit" name="btnSave" value="Değiştir" class="btn btn-primary pull-right" />
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </form>
+}

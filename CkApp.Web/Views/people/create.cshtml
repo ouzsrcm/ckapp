@@ -1,0 +1,83 @@
+﻿@model CkApp.Web.Models.PeopleManagement.MPeopleCreate
+
+<div class="pageheader">
+    <h2><i class="fa fa-table"></i> @ViewBag.ModuleTitle <span>@ViewBag.HeadTitle</span></h2>
+    <div class="breadcrumb-wrapper">
+        <span class="label">Buradasınız:</span>
+        <ol class="breadcrumb">
+            <li><a href="/">Anasayfa</a></li>
+            <li class="active">@ViewBag.ModuleTitle</li>
+        </ol>
+    </div>
+</div>
+
+<div class="contentpanel">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Kullanıcı bilgileri</h3>
+                </div>
+                <div class="panel-body">
+                    @if (Model.Person != null)
+                    {
+                        <a href="/people/profile/@Model.Person.PersonId" class="btn btn-default pull-right">
+                            Kullanıcı profiline git
+                        </a>
+                        <div class="clearfix"></div>
+                        <hr />
+                        @Html.Partial("_partCreatedPerson", Model.Person);
+                    }
+                    else
+                    {
+                        @Html.Partial("_partCreatePerson");
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @if (Model.Person != null)
+            {
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Kullanıcı giriş bilgileri</h3>
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.Credential != null)
+                        {
+                            @Html.Partial("_partCreatedCredential", Model.Credential)
+                        }
+                        else
+                        {
+                            @Html.Partial("_partCreateCredential", Model.Person)
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    @if (Model.Person != null)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            Firma Bilgileri
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Firma:</label>
+                            <div class="col-sm-8">
+                                @Model.Person.Company.Title
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

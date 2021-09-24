@@ -1,0 +1,38 @@
+﻿@model CkApp.Web.Models.Ordering.MOrderList
+
+<div class="table-responsive">
+    @if (Model != null)
+    {
+        <table class="table" id="table1">
+            <thead>
+                <tr>
+                    <th>Sipariş No</th>
+                    <th>Gönderen Firma</th>
+                    <th>Firma Yetkilisi</th>
+                    <th>Sipariş Durumu</th>
+                    <th>Gönderme Tarihi</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.AllOrders)
+                {
+                    <tr>
+                        <td>@item.OrderId</td>
+                        <td>@item.Company.Title</td>
+                        <td>@item.Person.Firstname @item.Person.Lastname</td>
+                        <td>@item.OrderState.Title</td>
+                        <td>@((item.CreationDate != null) ? ((DateTime)item.CreationDate).ToString("dd.MM.yyyy HH:mm") : "")</td>
+                        <td>
+                            <a href="/order/details/@item.OrderId" class="btn btn-info">
+                                Detaylar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+<div class="clearfix"></div>

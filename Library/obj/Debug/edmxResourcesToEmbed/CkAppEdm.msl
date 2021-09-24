@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AppModelStoreContainer" CdmEntityContainer="AppEntities">
+    <EntitySetMapping Name="Apps">
+      <EntityTypeMapping TypeName="AppModel.App">
+        <MappingFragment StoreEntitySet="App">
+          <ScalarProperty Name="AuthenticateUrl" ColumnName="AuthenticateUrl" />
+          <ScalarProperty Name="IsAuthenticationRequired" ColumnName="IsAuthenticationRequired" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="AppModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="AppModel.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="TaxNumber" ColumnName="TaxNumber" />
+          <ScalarProperty Name="TaxInformation" ColumnName="TaxInformation" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Gsm" ColumnName="Gsm" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+          <ScalarProperty Name="ParentCompanyId" ColumnName="ParentCompanyId" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyOrders">
+      <EntityTypeMapping TypeName="AppModel.CompanyOrder">
+        <MappingFragment StoreEntitySet="CompanyOrder">
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="CompanyOrderId" ColumnName="CompanyOrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyTypes">
+      <EntityTypeMapping TypeName="AppModel.CompanyType">
+        <MappingFragment StoreEntitySet="CompanyType">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CompanyTypeId" ColumnName="CompanyTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Conversations">
+      <EntityTypeMapping TypeName="AppModel.Conversation">
+        <MappingFragment StoreEntitySet="Conversation">
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConversationMessages">
+      <EntityTypeMapping TypeName="AppModel.ConversationMessage">
+        <MappingFragment StoreEntitySet="ConversationMessage">
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="ToPersonId" ColumnName="ToPersonId" />
+          <ScalarProperty Name="FromPersonId" ColumnName="FromPersonId" />
+          <ScalarProperty Name="ConversationId" ColumnName="ConversationId" />
+          <ScalarProperty Name="ConversationMessageId" ColumnName="ConversationMessageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="AppModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Districts">
+      <EntityTypeMapping TypeName="AppModel.District">
+        <MappingFragment StoreEntitySet="District">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="AppModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuItems">
+      <EntityTypeMapping TypeName="AppModel.MenuItem">
+        <MappingFragment StoreEntitySet="MenuItem">
+          <ScalarProperty Name="Sorting" ColumnName="Sorting" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ParentMenuItemId" ColumnName="ParentMenuItemId" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modules">
+      <EntityTypeMapping TypeName="AppModel.Module">
+        <MappingFragment StoreEntitySet="Module">
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModuleMethods">
+      <EntityTypeMapping TypeName="AppModel.ModuleMethod">
+        <MappingFragment StoreEntitySet="ModuleMethod">
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="ModuleMethodId" ColumnName="ModuleMethodId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModuleMethodHeaders">
+      <EntityTypeMapping TypeName="AppModel.ModuleMethodHeader">
+        <MappingFragment StoreEntitySet="ModuleMethodHeader">
+          <ScalarProperty Name="Charset" ColumnName="Charset" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IsAuthenticationRequired" ColumnName="IsAuthenticationRequired" />
+          <ScalarProperty Name="Css" ColumnName="Css" />
+          <ScalarProperty Name="Js" ColumnName="Js" />
+          <ScalarProperty Name="ModuleMethodId" ColumnName="ModuleMethodId" />
+          <ScalarProperty Name="ModuleMethodHeaderId" ColumnName="ModuleMethodHeaderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="AppModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="OrderStateId" ColumnName="OrderStateId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="AppModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="KiliDurumu" ColumnName="KiliDurumu" />
+          <ScalarProperty Name="KasaTuru" ColumnName="KasaTuru" />
+          <ScalarProperty Name="KanatTuru" ColumnName="KanatTuru" />
+          <ScalarProperty Name="KapiMarkasi" ColumnName="KapiMarkasi" />
+          <ScalarProperty Name="KIPervazUst" ColumnName="KIPervazUst" />
+          <ScalarProperty Name="KIPervazSol" ColumnName="KIPervazSol" />
+          <ScalarProperty Name="KIPervazSag" ColumnName="KIPervazSag" />
+          <ScalarProperty Name="KIKasaBoyu" ColumnName="KIKasaBoyu" />
+          <ScalarProperty Name="KDPervazUst" ColumnName="KDPervazUst" />
+          <ScalarProperty Name="KDPervazSol" ColumnName="KDPervazSol" />
+          <ScalarProperty Name="KDPervazSag" ColumnName="KDPervazSag" />
+          <ScalarProperty Name="KDKasaBoyu" ColumnName="KDKasaBoyu" />
+          <ScalarProperty Name="KasaEni" ColumnName="KasaEni" />
+          <ScalarProperty Name="DuvarKalinligi" ColumnName="DuvarKalinligi" />
+          <ScalarProperty Name="KapiYonu" ColumnName="KapiYonu" />
+          <ScalarProperty Name="KaplamaIc" ColumnName="KaplamaIc" />
+          <ScalarProperty Name="KaplamaDis" ColumnName="KaplamaDis" />
+          <ScalarProperty Name="KasaRengiIc" ColumnName="KasaRengiIc" />
+          <ScalarProperty Name="KasaRengiDis" ColumnName="KasaRengiDis" />
+          <ScalarProperty Name="ModelIc" ColumnName="ModelIc" />
+          <ScalarProperty Name="ModelDis" ColumnName="ModelDis" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="OrderStateId" ColumnName="OrderStateId" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderStates">
+      <EntityTypeMapping TypeName="AppModel.OrderState">
+        <MappingFragment StoreEntitySet="OrderState">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="OrderStateId" ColumnName="OrderStateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="People">
+      <EntityTypeMapping TypeName="AppModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="IsAuthorized" ColumnName="IsAuthorized" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreatedPersonId" ColumnName="CreatedPersonId" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Gsm" ColumnName="Gsm" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonCredentials">
+      <EntityTypeMapping TypeName="AppModel.PersonCredential">
+        <MappingFragment StoreEntitySet="PersonCredential">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreatedPersonId" ColumnName="CreatedPersonId" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="PersonCredentialId" ColumnName="PersonCredentialId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="AppModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleMenus">
+      <EntityTypeMapping TypeName="AppModel.RoleMenu">
+        <MappingFragment StoreEntitySet="RoleMenu">
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleMenuId" ColumnName="RoleMenuId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleModules">
+      <EntityTypeMapping TypeName="AppModel.RoleModule">
+        <MappingFragment StoreEntitySet="RoleModule">
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleModuleId" ColumnName="RoleModuleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoleModuleMethods">
+      <EntityTypeMapping TypeName="AppModel.RoleModuleMethod">
+        <MappingFragment StoreEntitySet="RoleModuleMethod">
+          <ScalarProperty Name="ModuleMethodId" ColumnName="ModuleMethodId" />
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleModuleMethodId" ColumnName="RoleModuleMethodId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="AppModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

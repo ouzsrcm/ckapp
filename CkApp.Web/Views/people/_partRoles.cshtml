@@ -1,0 +1,30 @@
+﻿@model CkApp.Web.Models.PeopleManagement.MPeopleRole
+
+@if(Model.Menus != null && Model.Modules != null && Model.RoleMenu != null && Model.RoleModule != null)
+{
+
+    <h4>
+        Menu Rolleri
+    </h4>
+    <ul class="list-group">
+        @foreach (var item in Model.Menus)
+        {
+            <li class="list-group-item">
+                <form method="post" action="/people/setmenu">
+                    <input type="hidden" name="PersonId" value="@Model.RoleMenu.PersonId" />
+                    <input type="hidden" name="MenuId" value="@item.MenuId" />
+                    @item.Title
+                    @if (Model.RoleMenu.MenuId == item.MenuId)
+                    {
+                        <input type="submit" name="btnUnsetMenu" value="Kaldır" class="btn btn-warning" />
+                    }
+                    else
+                    {
+                        <input type="submit" name="btnSetMenu" value="Ekle" class="btn btn-success" />
+                    }
+                </form>
+            </li>
+        }
+    </ul>
+
+}

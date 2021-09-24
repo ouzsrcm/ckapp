@@ -1,0 +1,2 @@
+android.app.Application
+CkApp.Android.CkApp.Android

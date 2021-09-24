@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CkApp.Web", "CkApp.Web\CkApp.Web.csproj", "{28A11155-DC81-4100-BDFC-CA03D8AA586F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{B1E9BD97-7F4B-45DD-9D20-36CA23CAB6E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CkApp.Android", "CkApp.Android\CkApp.Android.csproj", "{63F2AF8B-82C9-471C-A5CC-0B046206D959}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CkApp.Services", "CkApp.Services\CkApp.Services.csproj", "{4E0F6EA3-82B6-47FA-8E15-6400B7EE9045}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28A11155-DC81-4100-BDFC-CA03D8AA586F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A11155-DC81-4100-BDFC-CA03D8AA586F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A11155-DC81-4100-BDFC-CA03D8AA586F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A11155-DC81-4100-BDFC-CA03D8AA586F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E9BD97-7F4B-45DD-9D20-36CA23CAB6E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E9BD97-7F4B-45DD-9D20-36CA23CAB6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E9BD97-7F4B-45DD-9D20-36CA23CAB6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E9BD97-7F4B-45DD-9D20-36CA23CAB6E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63F2AF8B-82C9-471C-A5CC-0B046206D959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F2AF8B-82C9-471C-A5CC-0B046206D959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F2AF8B-82C9-471C-A5CC-0B046206D959}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{63F2AF8B-82C9-471C-A5CC-0B046206D959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F2AF8B-82C9-471C-A5CC-0B046206D959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63F2AF8B-82C9-471C-A5CC-0B046206D959}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4E0F6EA3-82B6-47FA-8E15-6400B7EE9045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E0F6EA3-82B6-47FA-8E15-6400B7EE9045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E0F6EA3-82B6-47FA-8E15-6400B7EE9045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E0F6EA3-82B6-47FA-8E15-6400B7EE9045}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
